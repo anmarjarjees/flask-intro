@@ -157,7 +157,8 @@ you can skip this statement (command) = optional
 NOTES:
 1)- The steps above will run our application/code with [Debug mode: on]
 2)- Instead of copy and paste the above lines three times, we can write them all in one line with ;
-$env:FLASK_APP = "app"; $env:FLASK_ENV = "development"; flask run 
+Windows => $env:FLASK_APP = "app"; $env:FLASK_ENV = "development"; flask run 
+Mac => export FLASK_APP=app; export FLASK_ENV=development; flask run
 3)- If our main application is named "app" which is the default name that is used by Flask Framework,
 in such case we can just run these two commands: $env:FLASK_ENV = "development"; flask run 
 
@@ -180,3 +181,58 @@ Notice that this command "flask run" will NOT work if you are using a different 
 # The End ====================================================================================== #
 
 
+# Below are more notes, info, and review/summary:
+# ===============================================
+Use the following steps from a terminal (Based on MS VS Code Docs):
+1. set an environment variable for FLASK_APP.
+On Linux and macOS, use export set FLASK_APP=webapp; on Windows use set FLASK_APP=webapp.
+2. Navigate into the hello_app folder, 
+then launch the program using python3 -m flask run (Linux/macOS) or python -m flask run (Windows).
+
+Notice that you will need to change python with py 
+**************************************************
+Tip: If you want to use a different filename than app.py, such as program.py,
+define an environment variable named FLASK_APP and set its value to your chosen file.
+Flask's development server then uses the value of FLASK_APP instead of the default file app.py. 
+*********************************************
+
+For more information check this link about set command:
+https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/set_1
+
+you can check this link also about PowerShell:
+https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.x
+
+
+**************************************************
+Quick Note about: 
+Create a requirements.txt file for the environment:
+===================================================
+When you share your app code through source control (Github) or some other means,
+it doesn't make sense to copy all the files in a virtual environment 
+because recipients can always recreate the virtual environment themselves.
+
+Accordingly, developers typically omit the virtual environment folder from source control 
+and instead describe the app's dependencies using a requirements.txt file.
+
+Although you can create the file by hand, 
+you can also use the pip freeze command to generate the file based on the exact libraries installed 
+in the activated environment:
+
+In the terminal, run =>> pip freeze > requirements.txt 
+to create the requirements.txt file in your project folder.
+
+In such case, anyone (or any build server) that receives a copy of the project 
+needs only to run the pip install -r requirements.txt command
+to reinstall the packages in the original the environment. 
+(The recipient still needs to create their own virtual environment, however.)
+
+
+To summarize, to reopen a project :-):
+1) Open the entire folder in VS Code: File => Open Folder (CTRL+K, CTRL+O)
+2) Activate your virtual environment: any-name\Scripts\activate
+(in case if you see an error with activation about execution policy please refer to our python note file)
+3) Run the flask with development mode (not in production mode): 
+> $env:FLASK_APP = "app"; $env:FLASK_ENV = "development"; flask run
+> $env:FLASK_ENV = "development"; flask run
+> Or with the LMS of Code Institute: $env:FLASK_APP = "run"; $env:FLASK_ENV = "development"; flask run 
+4) Jump to your code

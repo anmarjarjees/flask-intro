@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        Using the jinja expression symbols { {  } } to display the value of the python variable named "title"
+        
+        if we try to access a variable that is not passed to the render_template() function
+        we will not receive an error! Flask will just ignore rendering the value of this varaible
+     -->
+    <!-- <title>{{ title }}</title> -->
+
+    <!-- Using Jinja Statement: { % python statement % } -->
+
+    <!-- 
+        We will write this logic"
+        if title has a value then print it
+        else print the default text "Welcome to Flask"
+
+        in pure python:
+
+        if title:
+            print(title)
+        else:
+            print("Welcome to Flask")
+
+        
+        Using Jinja, just take your code line by line:
+    -->
+    <title>
+        {% if title %}
+        {{ title }}
+        {% else %}
+        Welcome to Flask
+        {% endif %}
+    </title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <ul>
+                <!-- 
+            We CANNOT use same the normal links that we have learned before with HTML course
+            - href="index.html" => Error: Not Found
+            The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+            
+            Even if we put the full local URL address: http://127.0.0.1:5000/index.html
+      
+
+            With Flask we need to place the values of the route() decorators:
+            
+         -->
+                <!-- <li><a href="index.html">Home</a></li> in Pure HTML-->
+                <!-- @app.route('/')  => the href="/" -->
+                <li><a href="/">Home</a></li>
+                <!-- 
+            the href="" values 
+            will be just use the values of the route() methods in the app.py file
+
+            app.route('/about') => <li><a href="/about">About Us</a></li>
+         -->
+                <li><a href="/about">About Us</a></li>
+                <!-- app.route('/portfolio') => <li><a href="/portfolio">Portfolio/a></li> -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <!-- app.route('/contact') => <li><a href="/contact">Contact Us/a></li> -->
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>Welcome to Flask Framework</h1>
+        <!-- How can we access these parameters: x,y,z, module_name, title, and cr, or any other parameter -->
+        <!-- We want to display the value of the module_name -->
+
+        <!-- Jinja template: -->
+        <!-- 
+        To embed python code into our HTML file we use Jinja templates: 
+        - { and { to open a python "expression" and } and } to close this expression 
+        => is used to display a value of a variable (formulas)
+        
+        - { and % to open a python "statement" and % and } to close this statement
+        => is used to write python statements like if condition, for loop
+        -->
+
+        <!-- in between the h2 tags, I want to display the module name that we are passing to the render function -->
+        <h2>{{ name }}</h2>
+        <h3>Python Micro Framework</h3>
+        <hr>
+        <p>Here is my first try with Flask! I do like it :-) and I hope you will like it. Just be patient!</p>
+        <p>the value of adding 4 to 5 is {{ 4+5 }}</p>
+        <p>the average of 4 to 5 is {{ (4+5)/2 }}</p>
+    </div>
+
+    <footer>
+        {{ copy }}
+    </footer>
+</body>
+
+</html>
