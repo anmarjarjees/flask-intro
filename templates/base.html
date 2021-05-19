@@ -1,0 +1,172 @@
+<!-- 
+    The Base Layout
+    Each page in the application will have the same basic layout around a different body. 
+    Instead of writing the entire HTML structure in each template, 
+    each template will extend a base template and override specific sections.
+-->
+
+<!-- 
+There are three blocks defined here that will be overridden in the other templates:
+{  % block title %  } will change the title displayed in the browser's tab and window title.
+{  % block header %  } is similar to title but will change the title displayed on the page.
+{  % block content %  } is where the content of each page goes, such as the login form or a blog post etc...
+
+NOTE: each one of these three different blocks needs { % endblock % }
+
+for more details, check the link: 
+https://flask.palletsprojects.com/en/2.0.x/tutorial/templates/
+-->
+
+<!-- 
+    The example of how can we use the template on an html page "register.html" for example:
+    The code below is what we can type inside our html pages:
+    Link: https://flask.palletsprojects.com/en/2.0.x/tutorial/templates/#register
+
+    { % extends 'base.html' % }
+
+    { % block header % }
+    <h1>{ % block title % }Register{ % endblock % }</h1>
+    { % endblock % }
+
+    { % block content % }
+    <form method="post">
+        <label for="username">Username</label>
+        <input name="username" id="username" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <input type="submit" value="Register">
+    </form>
+    { % endblock % }
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        Using the jinja expression symbols { {  } } to display the value of the python variable named "title"
+        
+        if we try to access a variable that is not passed to the render_template() function
+        we will not receive an error! Flask will just ignore rendering the value of this varaible
+     -->
+    <!-- <title>{{ title }}</title> -->
+
+    <!-- Using Jinja Statement: { % python statement % } -->
+
+    <!-- 
+        We will write this logic"
+        if title has a value then print it
+        else print the default text "Welcome to Flask"
+
+        in pure python:
+
+        if title:
+            print(title)
+        else:
+            print("Welcome to Flask")
+
+        
+        Using Jinja, just take your code line by line:
+    -->
+    <title>
+        {% if page_title %}
+        {{ page_title }}
+        {% else %}
+        Welcome to Flask
+        {% endif %}
+    </title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- We are calling our own style.css file -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+
+
+</head>
+
+
+
+<body>
+    <!-- 
+    We copied this nav from bootstrap:
+    Component (from the left sidebar) => Navbar => select the first one for example
+
+    Then you can remove the unnecessary elements that you don't want to use
+    -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 
+        Creating our div for the rest of the page contents using bootstrap class named "container"
+        
+        Info below from Bootstrap Docs:
+        ------------------------------
+        Containers: are the most basic layout element in Bootstrap and are required when using our default grid system. Containers are used to contain, pad, and (sometimes) center the content within them. 
+        While containers can be nested, most layouts do not require a nested container.
+
+        Bootstrap comes with three different containers:
+
+        .container, which sets a max-width at each responsive breakpoint
+        .container-fluid, which is width: 100% at all breakpoints
+        .container-{breakpoint}, which is width: 100% until the specified breakpoint
+
+        Notice we need to have the nave standing along by itself like other website examples
+        -->
+    <div class="container">
+        <!-- We need Flask to display/render the page content  -->
+        {% block content %}
+        <!-- 
+          here is the unique content of each page 
+          we are just telling flask that in between starting and ending block will be the content of each page
+          Notice that we need to repeat the same block inside all the html pages:
+
+          here where we will have the unique content of every html page
+       -->
+        {% endblock %}
+
+
+        <footer>
+            {% if cr %}
+            {{ cr }}
+            {% else %}
+            &copy;2021 Flask Framework Introduction - CBC
+            {% endif %}
+        </footer>
+    </div>
+
+    <!-- JavaScript Bootstrap link: -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

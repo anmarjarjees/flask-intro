@@ -1,59 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Flask</title>
-</head>
 
-<body>
+{% block content %}
+<h1>About Flask Framework</h1>
+<!-- 
+        We are outputting a varaible named any_thing 
+        we didn't pass such variable to our about.html
+        also any_thing doesn't have any value
 
-    <header>
+        But it's not an error (mistake)
+        Python (Flask) will consider any_thing to be new variable that created instantly without any value
+    -->
+{{ any_thing }}
+<!-- output a variable named "avg", Flask will just output nothing -->
+{{ avg }}
 
-        <nav>
+<!-- 
+            output the list named "skills"
+            not good way to display the skills :-( 
+        -->
+{{ skills }}
 
-            <ul>
-                <!-- 
-            We CANNOT use same the normal links that we have learned before with HTML course
-            - href="index.html" => Error: Not Found
-            The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-            
-            Even if we put the full local URL address: http://127.0.0.1:5000/index.html
-      
+<!-- 
+            better display :-) for the end user 
+            using list items is much better
+        -->
+<ul>
+    <!-- 
+            skills is a list (array) and each value has an index
+            we can output using the [ index ] for an array variable as we normally do with other languages 
+            -->
+    <li>{{skills[0]}}</li>
+    <li>{{skills[1]}}</li>
+    <li>{{skills[2]}}</li>
+    <li>{{skills[3]}}</li>
+    <li>{{skills[4]}}</li>
+    <li>{{skills[5]}}</li>
+</ul>
 
-            With Flask we need to place the values of the route() decorators:
-            
-         -->
-                <!-- <li><a href="index.html">Home</a></li> in Pure HTML-->
-                <!-- @app.route('/')  => the href="/" -->
-                <li><a href="/">Home</a></li>
-                <!-- 
-            the href="" values 
-            will be just use the values of the route() methods in the app.py file
+<hr>
+<!-- 
+        Notice that we can output the values of any list in python by using either of these two ways:
+        1- The normal way: my_list_name[index_value] => Example: skills[0] => the value of the first element
+        2- Using the . notation (object notation) as we did in OOP:
+        
+        The object call syntax: object_name.property or object_name.method()
+        
+        To use point(2), you can think about the list as an object and the index value as a property!!!!
+        Examples: 
+        - skills.0 => the value of the first element
+        - skills.1 => the value of the second element
+        -->
+<ul>
+    <!-- 
+            skills is a list (array) and each value has an index
+            we can output using the [ index ] for an array variable as we normally do with other languages 
+            -->
+    <li>{{skills.0}}</li>
+    <li>{{skills.1}}</li>
+    <li>{{skills.2}}</li>
+    <li>{{skills.3}}</li>
+    <li>{{skills.4}}</li>
+    <li>{{skills.5}}</li>
+</ul>
+<hr>
+<!-- 
+        Let's try to use for loop to print the values of skills array (list)
+    
+        In pure python:
+        for skill in skills:
+            print (skill)
+        
+        We will write it in jinja:
+        The code below is without any HTML formatting as we just need to learn how to display them first, we will leave it :-( ):
+        -->
+{% for skill in skills %}
+{{skill}}
+{% endfor %}
 
-            app.route('/about') => <li><a href="/about">About Us</a></li>
-         -->
-                <li><a href="/about">About Us</a></li>
-                <!-- app.route('/portfolio') => <li><a href="/portfolio">Portfolio/a></li> -->
-                <li><a href="/portfolio">Portfolio</a></li>
-                <!-- app.route('/contact') => <li><a href="/contact">Contact Us/a></li> -->
-                <li><a href="/contact">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
+<hr>
+<ul>
+    {% for skill in skills %}
+    <li>{{skill}}</li>
+    {% endfor %}
+</ul>
 
-    <div class="content">
-        <h1>About Flask Framework</h1>
-        <h3>Python Micro Framework</h3>
-        <hr>
-        <p>Here is my first try with Flask! I do like it :-) and I hope you will like it. Just be patient!</p>
-    </div>
+<!-- 
+        Task:
+        use for loop to print the values of skills array (list)
+        but if the skill is "python" then display python in italic using the <em>
 
-    <footer>
-        Flask Framework
-    </footer>
-</body>
+        In pure python (the logic):
+        for skill in skills:
+            if skill=='Python':
+                print (skill) <= in italic
+            else:
+                print (skill) <= normal
+        -->
 
-</html>
+<!-- with Jinja we have loops and if statements: -->
+<ul>
+    {% for skill in skills %}
+    {% if skill=='Python' %}
+    <li><em>{{skill}}</em></li>
+    {% else %}
+    <li>{{skill}}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,147 @@
+<!-- 
+    The Base Layout
+    Each page in the application will have the same basic layout around a different body. 
+    Instead of writing the entire HTML structure in each template, 
+    each template will extend a base template and override specific sections.
+-->
+
+<!-- 
+There are three blocks defined here that will be overridden in the other templates:
+{  % block title %  } will change the title displayed in the browser's tab and window title.
+{  % block header %  } is similar to title but will change the title displayed on the page.
+{  % block content %  } is where the content of each page goes, such as the login form or a blog post etc...
+
+NOTE: each one of these three different blocks needs { % endblock % }
+
+for more details, check the link: 
+https://flask.palletsprojects.com/en/2.0.x/tutorial/templates/
+-->
+
+<!-- 
+    The example of how can we use the template on an html page "register.html" for example:
+    The code below is what we can type inside our html pages:
+    Link: https://flask.palletsprojects.com/en/2.0.x/tutorial/templates/#register
+
+    { % extends 'base.html' % }
+
+    { % block header % }
+    <h1>{ % block title % }Register{ % endblock % }</h1>
+    { % endblock % }
+
+    { % block content % }
+    <form method="post">
+        <label for="username">Username</label>
+        <input name="username" id="username" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <input type="submit" value="Register">
+    </form>
+    { % endblock % }
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        Using the jinja expression symbols { {  } } to display the value of the python variable named "title"
+        
+        if we try to access a variable that is not passed to the render_template() function
+        we will not receive an error! Flask will just ignore rendering the value of this varaible
+     -->
+    <!-- <title>{{ title }}</title> -->
+
+    <!-- Using Jinja Statement: { % python statement % } -->
+
+    <!-- 
+        We will write this logic"
+        if title has a value then print it
+        else print the default text "Welcome to Flask"
+
+        in pure python:
+
+        if title:
+            print(title)
+        else:
+            print("Welcome to Flask")
+
+        
+        Using Jinja, just take your code line by line:
+    -->
+    <title>
+        {% if page_title %}
+        {{ page_title }}
+        {% else %}
+        Welcome to Flask
+        {% endif %}
+    </title>
+
+    <!-- We are calling our own style.css file -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+
+
+</head>
+
+
+
+<body>
+
+    <header>
+        <nav>
+
+            <ul>
+                <!-- 
+            We CANNOT use same the normal links that we have learned before with HTML course
+            - href="index.html" => Error: Not Found
+            The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+            
+            Even if we put the full local URL address: http://127.0.0.1:5000/index.html
+      
+
+            With Flask we need to place the values of the route() decorators:
+            
+         -->
+                <!-- <li><a href="index.html">Home</a></li> in Pure HTML -->
+                <!-- @app.route('/')  => the href="/" -->
+                <li><a href="/">Home</a></li>
+
+                <!-- 
+            the href="" values will be just use the values of the route() methods in the app.py file
+
+            app.route('/about') => <li><a href="/about">About Us</a></li>
+         -->
+                <li><a href="/about">About Us</a></li>
+                <!-- app.route('/portfolio') => <li><a href="/portfolio">Portfolio/a></li> -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <!-- app.route('/contact') => <li><a href="/contact">Contact Us/a></li> -->
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        <!-- We need Flask to display/render the page content  -->
+        {% block content %}
+        <!-- 
+          here is the unique content of each page 
+          we are just telling flask that in between starting and ending block will be the content of each page
+          Notice that we need to repeat the same block inside all the html pages:
+
+          here where we will have the unique content of every html page
+       -->
+        {% endblock %}
+    </div>
+
+    <footer>
+        {% if cr %}
+        {{ cr }}
+        {% else %}
+        &copy;2021 Flask Framework Introduction - CBC
+        {% endif %}
+    </footer>
+</body>
+
+</html>

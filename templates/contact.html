@@ -1,60 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Flask</title>
-</head>
+{% block content %}
 
-<body>
+<h1>Contact Flask Framework</h1>
 
-    <header>
-
-        <nav>
-
-            <ul>
-                <!-- 
-            We CANNOT use same the normal links that we have learned before with HTML course
-            - href="index.html" => Error: Not Found
-            The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-            
-            Even if we put the full local URL address: http://127.0.0.1:5000/index.html
-      
-
-            With Flask we need to place the values of the route() decorators:
-            
-         -->
-                <!-- <li><a href="index.html">Home</a></li> in Pure HTML-->
-                <!-- @app.route('/')  => the href="/" -->
-                <li><a href="/">Home</a></li>
-                <!-- 
-            the href="" values 
-            will be just use the values of the route() methods in the app.py file
-
-            app.route('/about') => <li><a href="/about">About Us</a></li>
-         -->
-                <li><a href="/about">About Us</a></li>
-                <!-- app.route('/portfolio') => <li><a href="/portfolio">Portfolio/a></li> -->
-                <li><a href="/portfolio">Portfolio</a></li>
-                <!-- app.route('/contact') => <li><a href="/contact">Contact Us/a></li> -->
-                <li><a href="/contact">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="content">
-        <h1>Contact Flask Framework</h1>
-        <h2>Hello world!</h2>
-        <h3>Python Micro Framework</h3>
-        <hr>
-        <p>Here is my first try with Flask! I do like it :-) and I hope you will like it. Just be patient!</p>
-    </div>
-
-    <footer>
-        Flask Framework
-    </footer>
-</body>
-
-</html>
+{% endblock %}

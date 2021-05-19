@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        Don't forget to use { { your_python_variable } } to write your expression 
+        We don't to use this code: we might have two titles
+        <title>{ {title} } About Flask</title> 
+
+        We should use if condition to check:
+        if title has a value then print it
+        else just print "About Flask":
+
+        in pure Py:
+        if title:
+            print (title)
+        else:
+            print ("About Flask")
+
+        The same logic in Jinja:   
+        remember with jinja we have to symbols:
+        - Python expression: { { } }
+        - Python statement: { % % }
+
+        1) if title <= { % if title % }
+        2) print (title) <= print only in Terminal (CLI) => to print in the browser window we use: { { title } }
+        3) else <= { % else % }
+        4) print ("About Flask") <= print only in Terminal (CLI) => to print in the browser, we just type "About Flask"
+        5) in Jinja we need/have to end our block using: endif, endfor, etc...
+    -->
+
+
+    <!-- 
+        Using the jinja expression symbols { {  } } to display the value of the python variable named "title"
+        
+        if we try to access a variable that is not passed to the render_template() function
+        we will not receive an error! Flask will just ignore rendering the value of this varaible
+     -->
+    <!-- <title>{{ title }}</title> -->
+
+    <!-- Using Jinja Statement: { % python statement % } -->
+
+    <!-- 
+        We will write this logic"
+        if title has a value then print it
+        else print the default text "Welcome to Flask"
+
+        in pure python:
+
+        if title:
+            print(title)
+        else:
+            print("Welcome to Flask")
+
+        
+        Using Jinja, just take your code line by line:
+    -->
+    <title>
+        {% if page_title %}
+        {{ page_title }}
+        {% else %}
+        About Flask Framework
+        {% endif %}
+    </title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+
+            <ul>
+                <!-- 
+            We CANNOT use same the normal links that we have learned before with HTML course
+            - href="index.html" => Error: Not Found
+            The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+            
+            Even if we put the full local URL address: http://127.0.0.1:5000/index.html
+      
+
+            With Flask we need to place the values of the route() decorators:
+            
+         -->
+                <!-- <li><a href="index.html">Home</a></li> in Pure HTML -->
+                <!-- @app.route('/')  => the href="/" -->
+                <li><a href="/">Home</a></li>
+
+                <!-- 
+            the href="" values will be just use the values of the route() methods in the app.py file
+
+            app.route('/about') => <li><a href="/about">About Us</a></li>
+         -->
+                <li><a href="/about">About Us</a></li>
+                <!-- app.route('/portfolio') => <li><a href="/portfolio">Portfolio/a></li> -->
+                <li><a href="/portfolio">Portfolio</a></li>
+                <!-- app.route('/contact') => <li><a href="/contact">Contact Us/a></li> -->
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="content">
+        <h1>About Flask Framework</h1>
+        <!-- 
+        We are outputting a varaible named any_thing 
+        we didn't pass such variable to our about.html
+        also any_thing doesn't have any value
+
+        But it's not an error (mistake)
+        Python (Flask) will consider any_thing to be new variable that created instantly without any value
+    -->
+        {{ any_thing }}
+        <!-- output a variable named "avg", Flask will just output nothing -->
+        {{ avg }}
+
+        <!-- 
+            output the list named "skills"
+            not good way to display the skills :-( 
+        -->
+        {{ skills }}
+
+        <!-- 
+            better display :-) for the end user 
+            using list items is much better
+        -->
+        <ul>
+            <!-- 
+            skills is a list (array) and each value has an index
+            we can output using the [ index ] for an array variable as we normally do with other languages 
+            -->
+            <li>{{skills[0]}}</li>
+            <li>{{skills[1]}}</li>
+            <li>{{skills[2]}}</li>
+            <li>{{skills[3]}}</li>
+            <li>{{skills[4]}}</li>
+            <li>{{skills[5]}}</li>
+        </ul>
+
+        <hr>
+        <!-- 
+        Notice that we can output the values of any list in python by using either of these two ways:
+        1- The normal way: my_list_name[index_value] => Example: skills[0] => the value of the first element
+        2- Using the . notation (object notation) as we did in OOP:
+        
+        The object call syntax: object_name.property or object_name.method()
+        
+        To use point(2), you can think about the list as an object and the index value as a property!!!!
+        Examples: 
+        - skills.0 => the value of the first element
+        - skills.1 => the value of the second element
+        -->
+        <ul>
+            <!-- 
+            skills is a list (array) and each value has an index
+            we can output using the [ index ] for an array variable as we normally do with other languages 
+            -->
+            <li>{{skills.0}}</li>
+            <li>{{skills.1}}</li>
+            <li>{{skills.2}}</li>
+            <li>{{skills.3}}</li>
+            <li>{{skills.4}}</li>
+            <li>{{skills.5}}</li>
+        </ul>
+        <hr>
+        <!-- 
+        Let's try to use for loop to print the values of skills array (list)
+    
+        In pure python:
+        for skill in skills:
+            print (skill)
+        
+        We will write it in jinja:
+        The code below is without any HTML formatting as we just need to learn how to display them first, we will leave it :-( ):
+        -->
+        {% for skill in skills %}
+        {{skill}}
+        {% endfor %}
+
+        <hr>
+        <ul>
+            {% for skill in skills %}
+            <li>{{skill}}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- 
+        Task:
+        use for loop to print the values of skills array (list)
+        but if the skill is "python" then display python in italic using the <em>
+
+        In pure python (the logic):
+        for skill in skills:
+            if skill=='Python':
+                print (skill) <= in italic
+            else:
+                print (skill) <= normal
+        -->
+
+        <!-- with Jinja we have loops and if statements: -->
+        <ul>
+            {% for skill in skills %}
+            {% if skill=='Python' %}
+            <li><em>{{skill}}</em></li>
+            {% else %}
+            <li>{{skill}}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+
+    </div>
+
+    <footer>
+        {{ cr }}
+    </footer>
+</body>
+
+</html>

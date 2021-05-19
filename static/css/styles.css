@@ -1,0 +1,34 @@
+/* Creating my own custom style: a class named "fig-style" to style figure element */
+.fig-style {
+    margin: auto;
+    padding: 3px;
+    border: 2px groove rgb(81, 106, 143);
+    border-radius: 5px;
+    width: 50%;
+    /* code below (optional) for old browser versions */
+    /* 
+    W3Schools:
+    https://www.w3schools.com/cssref/css3_pr_border-radius.asp 
+    */
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-color: rgb(189, 208, 250);
+}
+
+/* style img element inside an element with a class named "fig-style"  */
+.fig-style img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+}
+
+/* Creating my own custom style: .figcap-style to style figcaption element */
+.figcap-style {
+    margin-top:3px;
+    background-color: rgb(24, 53, 80);
+    color: rgb(189, 208, 250);
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    padding: 2px;
+}
