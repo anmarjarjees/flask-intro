@@ -1,0 +1,40 @@
+[
+    {
+        "campus": "Toronto",
+        "phone": "905-123-1234",
+        "programs": [
+            "FSSD",
+            "MDM",
+            "DMWD",
+            "SW Eng.",
+            "APA",
+            "MHA",
+            "DBA"
+        ]
+    },
+    {
+        "campus": "Mississauga",
+        "phone": "905-123-1222",
+        "programs": [
+            "FSSD",
+            "MDM",
+            "DMWD",
+            "BS",
+            "APA",
+            "PF",
+            "Law"
+        ]
+    },
+    {
+        "campus": "Scarborough",
+        "phone": "905-123-1235",
+        "programs": [
+            "FSSD",
+            "MDM",
+            "DMWD",
+            "SW Eng.",
+            "APA",
+            "Law"
+        ]
+    }
+]

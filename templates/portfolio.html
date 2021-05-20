@@ -9,4 +9,287 @@
         -->
 <p>The average of 90 and 95 is {{ (90+95)/2 }}</p>
 
+<h2>Raw Display (No HTML Formatting)</h2>
+{{ cars }}
+<hr>
+{{ cbc }}
+<hr>
+<!-- staring with cars json file: "cars" list of JSON objects -->
+
+<!-- 
+    I want to use the first element (first car) => cars[0] 
+          
+        cars[0] = {
+            'type': 'Honda', 
+            'model': 2019, 
+            'color': 'white'
+        } 
+-->
+<h3>First Car Object</h3>
+<!-- the code below will give us: {'type': 'Honda', 'model': 2019, 'color': 'white'} -->
+{{ cars[0] }}
+
+<h3>Second Car Object</h3>
+<!-- the second item the code below will give us:  {'type': 'Fiat', 'model': 2010, 'color': 'blue'} -->
+{{ cars[1] }}
+
+
+
+<!-- 
+    cars[0] is a json object that has these values:
+     {
+            'type': 'Honda', 
+            'model': 2019, 
+            'color': 'white'
+    } 
+-->
+<h3>First Car Info</h3>
+{{ cars[0]['type'] }}
+{{ cars[0]['model'] }}
+{{ cars[0]['color'] }}
+<!-- Honda 2019 white -->
+
+<!-- 
+        Task: Print (output) this message (paragraph):
+        Martin's car is Honda model 2019, and its color is white.
+
+        - don't use literal text :-)
+        - use its object/dictionary (for the first car)
+-->
+<p>Martin's car is "Honda" model "2019", and its color is "white".</p>
+<!-- Using Jinja :-) -->
+<p>Martin's car is "{{cars[0]['type']}}" model "{{cars[0]['model']}}", and its color is "{{cars[0]['color']}}"</p>
+
+<h2>All Cars' Info</h2>
+<ul>
+    <!-- Nested list :-) -->
+    <li>Car#1
+        <ul>
+            <!-- Each car has 3 properties: type, model, and color -->
+            <li>{{ cars[0]["type"] }}</li>
+            <li>{{ cars[0]["model"] }}</li>
+            <li>{{ cars[0]["color"] }}</li>
+        </ul>
+    </li>
+
+    <li>Car#2:
+        <ul>
+            <li>{{ cars[1]["type"] }}</li>
+            <li>{{ cars[1]["model"] }}</li>
+            <li>{{ cars[1]["color"] }}</li>
+        </ul>
+    </li>
+
+    <li>Car#3:
+        <ul>
+            <li>{{ cars[2]["type"] }}</li>
+            <li>{{ cars[2]["model"] }}</li>
+            <li>{{ cars[2]["color"] }}</li>
+        </ul>
+    </li>
+</ul>
+
+<!-- using loop to list/display the values of cars[] simple python list -->
+<!-- 
+    Let's start with the basic for loop (the one we used in our app.py file):
+
+    # Pure Python (app.py)
+    for car in cars_data:
+        # 1) Print the value of the key "type"
+        print(car['type'])
+
+        # 2) Print the value of the key "model"
+        print(car['model'])
+
+        # 3) Print the value of the key "color"
+        print(car['color'])
+-->
+
+
+<h2>All Cars' Info (Basic Loop)</h2>
+<ul>
+    {% for car in cars %}
+    <li>{{car['type']}}</li>
+    <li>{{car['model']}}</li>
+    <li>{{car['color']}}</li>
+    {% endfor %}
+</ul>
+
+<!-- 
+    Remember we used this logic above:
+    <li>Car#1
+        <ul>
+            <li>{ { cars[0]["type"] } }</li>
+            <li>{ { cars[0]["model"] } }</li>
+            <li>{ { cars[0]["color"] } }</li>
+        </ul>
+    </li>
+
+    We can repeat the same structure inside our loop below:
+ -->
+<h2>All Cars' Info (Advanced Loop)</h2>
+<ul>
+    {% for car in cars %}
+    <!-- 
+        With Jinja: 
+        > We have an object named "loop" inside any loop we create
+        > This "loop" object has the property named "index"
+        > The index property count from 1 for the first loop iteration then 2,3, and so on... 
+        
+        So we can use loop.index inside for loop that counts from 1 
+    -->
+    <li>Car# {{loop.index}}:
+        <ul>
+            <li>{{car['type']}}</li>
+            <li>{{car['model']}}</li>
+            <li>{{car['color']}}</li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<!-- with CBC campuses:
+[
+{
+    'campus': 'Toronto', 
+    'phone': '905-123-1234', 
+    'programs': ['FSSD', 'MDM', 'DMWD', 'SW Eng.', 'APA', 'MHA', 'DBA']
+},
+{'campus': 'Mississauga', 'phone': '905-123-1222', 'programs': ['FSSD', 'MDM', 'DMWD', 'BS', 'APA', 'PF', 'Law']}, 
+{'campus': 'Scarborough', 'phone': '905-123-1235', 'programs': ['FSSD', 'MDM', 'DMWD', 'SW Eng.', 'APA', 'Law']}]
+-->
+
+<!-- for learning we printing one campus info -->
+<h2>CBC Campuses:</h2>
+<h3>Toronto :-)</h3>
+<!-- Display the info about the first campus (which in index 0 of our list) -->
+<!-- display its name "Toronto" -->
+<h3>{{cbc[0]}}</h3>
+<!-- {'campus': 'Toronto', 'phone': '905-123-1234', 'programs': ['FSSD', 'MDM', 'DMWD', 'SW Eng.', 'APA', 'MHA', 'DBA']} -->
+
+<h3>{{cbc[0]['campus']}} Campus Programs:</h3>
+<!-- Continue with displaying the toronto campus info -->
+<ul>
+    <!-- display all the programs of Toronto Campus one by one manually!!! :-( -->
+    <li>{{ cbc[0]['programs'][0]}}</li> <!-- FSSD -->
+    <li>{{ cbc[0]['programs'][1]}}</li> <!-- MDM -->
+    <li>{{ cbc[0]['programs'][2]}}</li> <!-- DMWD -->
+    <li>{{ cbc[0]['programs'][3]}}</li> <!-- SW Eng. -->
+    <li>{{ cbc[0]['programs'][4]}}</li> <!-- APA -->
+    <li>{{ cbc[0]['programs'][5]}}</li> <!-- MHA -->
+    <li>{{ cbc[0]['programs'][6]}}</li> <!-- DBA -->
+</ul>
+<p>Phone: {{ cbc[0]['phone']}}</p>
+
+<hr>
+<h3>{{cbc[1]['campus']}} Campus Programs:</h3>
+<!-- using for loop!!! :-) -->
+<ul>
+    {% for program_name in cbc[1]['programs'] %}
+    <li>{{program_name }}</li>
+    {% endfor %}
+</ul>
+<p>Phone: {{ cbc[1]['phone']}}</p>
+
+<h3>{{cbc[2]['campus']}} Campus Programs:</h3>
+<!-- using for loop!!! :-) -->
+<ul>
+    {% for program_name in cbc[2]['programs'] %}
+    <li>{{program_name }}</li>
+    {% endfor %}
+</ul>
+<p>Phone: {{ cbc[2]['phone']}}</p>
+
+<hr>
+<hr>
+<hr>
+
+
+<!-- display all the programs of Toronto Campus using for loop starting with "Toronto" -->
+<!-- we will change the h3 to be a link to open this campus page in new "html page" -->
+<!-- 
+    We can't use our normal link "url_for('campus')" as we did before this will give us an error!
+    Error: Could not build url for endpoint 'campus'. Did you forget to specify values ['campus_name']?
+    because this time we need to pass a value to the url
+
+    Solution:
+    we will NOT use the function url_for()
+    instead we need/have to use the first way by just adding the route() URL values:
+    The first try: @app.route("/campus") => so the link will be => "/campus"
+    
+    The second try:
+    /campus/value => the name of the campus
+-->
+
+<!-- 
+    the first campus in our list is "Toronto"
+
+    We should avoid the hard coding: href="/campus/Toronto"
+    We will use: href="/campus/{{cbc[0]['campus']}} "
+ -->
+<h3><a href="/campus/{{cbc[0]['campus']}} ">{{cbc[0]['campus']}} Campus Programs:</a></h3>
+<!-- using for loop!!! :-) -->
+<ul>
+    {% for program_name in cbc[0]['programs'] %}
+    <li>{{program_name }}</li>
+    {% endfor %}
+</ul>
+<p>Phone: {{ cbc[1]['phone']}}</p>
+
+<h3><a href="/campus/{{cbc[1]['campus']}}">{{cbc[1]['campus']}} Campus Programs:</a></h3>
+<!-- using for loop!!! :-) -->
+<ul>
+    {% for program_name in cbc[1]['programs'] %}
+    <li>{{program_name }}</li>
+    {% endfor %}
+</ul>
+<p>Phone: {{ cbc[1]['phone']}}</p>
+
+<h3><a href="/campus/{{cbc[2]['campus']}}">{{cbc[2]['campus']}} Campus Programs:</a></h3>
+<!-- using for loop!!! :-) -->
+<ul>
+    {% for program_name in cbc[2]['programs'] %}
+    <li>{{program_name }}</li>
+    {% endfor %}
+</ul>
+<p>Phone: {{ cbc[2]['phone']}}</p>
+
+
+<!-- 
+    Let's try to put all in two for loops:
+    - first loop => 3 campuses => iterates 3 times
+    - second loop => looping through the programs in every campus (Done before)
+
+    Remember that variable "cbc" is a list/array of json objects
+
+    Instead of typing this block 3 times:
+    <h3><a href="/campus/{ {cbc[0]['campus']} } ">{{cbc[0]['campus']}} Campus Programs:</a></h3>
+    <ul>
+    { % for program_name in cbc[0]['programs'] % }
+    <li>{{program_name }}</li>
+    { % endfor % }
+    </ul>
+    <p>Phone: { { cbc[1]['phone']} }</p>
+
+    We can type it one time:
+-->
+<hr>
+<h2>CBC Campuses: (for loops)</h2>
+{% for campus_info in cbc %}
+<!-- 
+    Here is our code to add the link to every individual campus above:
+    <h3><a href="/campus/{{ cbc[0]['campus'] }}">{{ cbc[0]['campus'] }}</a></h3> 
+-->
+<h3><a href="/campus/{{ campus_info['campus'] }}">{{ campus_info['campus'] }} Campus Programs:</a></h3>
+<ul>
+    {% for program_name in campus_info['programs'] %}
+    <li>{{program_name}}</li>
+    {% endfor %}
+</ul>
+<p>Phone: {{ campus_info['phone']}}</p>
+{% endfor %}
+
+
 {% endblock %}
