@@ -39,7 +39,8 @@ def home():  # or name it "main" or name it "index"
 
 
 # creating more pages: about - portfolio - contact
-# ===================
+# ================================================
+
 @app.route('/about')  # The local link: http://127.0.0.1:5000/about
 # Most of the cases the function name could be the same as the URL value we are passing to the route (not mandatory)
 def about():
@@ -152,7 +153,9 @@ def portfolio():
     2012
     red
     """
-
+    # At the end we will pass the values of:
+    # > cars_data into this parameter "cars"
+    # > cbc_data into this parameter "cbc"
     return render_template('portfolio.html', cars=cars_data, cbc=cbc_data)
 
 
@@ -207,6 +210,7 @@ def process():
     # Flask parses incoming request data for you and gives you access to it through that global object.
     # Internally Flask makes sure that you always get the correct data for the active thread if you are in a multithreaded environment.
     # Link: https://flask.palletsprojects.com/en/2.0.x/api/?highlight=request#flask.request
+
     # for testing:
     print(request.form)
     """
