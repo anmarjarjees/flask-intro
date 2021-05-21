@@ -2,6 +2,180 @@
 
 {% block content %}
 
-<h1>Contact Flask Framework</h1>
+<h1>Contact Us</h1>
+<p>Please feel free to contact us anytime by phone. We are available 24/7!</p>
 
+<h2>Register Now!</h2>
+
+<!-- 
+     The form opening tag need to have the following attributes:
+     - action
+     - method
+
+     - the "method" attribute:
+     We can use either the value of "POST" or the value of "GET"
+     method="POST" or method="post" => POST for writing (sending) the info into other platform (file, database) 
+     method="GET" or method="get" => GET for searching/getting information
+     
+     - the "action" attribute:
+     action="??" => The file that contains the code for manipulating the form input fields (like PHP) or 
+     in our case (Flask Python file) this will be the "html file" to display the final message to the user
+     which means we need to create this file inside our template folder
+
+     action="process" is linked to our process() function in the flask main file: "app.py"
+     def process():
+
+     so the value of the action attribute will be the name of a function inside the file "app.py"
+ -->
+
+
+<!-- 
+    We will use Bootstrap documentation to create our form here:
+    - Bootstrap => Documentation link:
+    - Components (From the left vertical nav) => Forms
+    - Copy the first sample
+ -->
+
+<form action="process" method="POST">
+    <!-- 
+        Checking if all or any field is empty then display this div element 
+        
+        The code below is also from Bootstrap:
+        https://getbootstrap.com/docs/5.0/components/alerts/
+
+        But we don't want to display these messages (div element) unless if there is an empty field
+        so we will check the field_is_empty boolean variable
+    -->
+
+    <!-- 
+        Instead of typing: 
+        { % if first_name=="" or last_name=="" or email=="" % }
+
+        we can use this logic by checking our boolean varaible named "empty_field
+     -->
+    {% if empty_field %}
+    <div class="alert alert-danger" role="alert">
+        Please be advised that all the following fields are required!
+        <ul>
+            <li>First Name</li>
+            <li>Last Name</li>
+            <li>Email</li>
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- 
+     Very Important Note:
+     Notice like PHP language, every field needs to have "name" attribute to get its unique value 
+     by using the Python global variable "request" in our main application file
+     -->
+    <div class="form-group">
+        <label for="first-name">First Name*</label>
+        <!-- 
+            we can set the value of the name attribute of any field
+            to be the same like its id value but we DON'T have to
+            so we can name it name1, f-name, etc...
+
+            for the learning purpose, we will not use the "required" HTML5 attribute
+            we will use python to check if the field is filled or is empty
+
+            NOTE: We removed the attribute "required" just for testing our Python validation
+          -->
+
+        <!-- 
+            The last stage:
+            The more advanced step is adding value attributes to get the values of the current user input:
+            -->
+        <input type="text" name="first-name" class="form-control" id="first-name" value="{{ first_name }}">
+    </div>
+
+    <div class="form-group">
+        <label for="last-name">Last Name*</label>
+        <input type="text" name="last-name" class="form-control" id="last-name" value="{{ last_name}}">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address*</label>
+        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            value="{{ email }}"> <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+            anyone else.</small>
+    </div>
+
+    <!-- adding our checkbox: for the programming skills -->
+    <p>From the list below, please check any skill that you know:</p>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="skills" id="html" value="HTML and CSS">
+        <label class="form-check-label" for="html">
+            HTML and CSS
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="skills" id="js" value="JavaScript">
+        <label class="form-check-label" for="js">
+            JavaScript
+        </label>
+    </div>
+
+    <!-- 
+        Below we can ignore using id and for attributes
+        Because we put input element inside label element
+     -->
+    <div class="form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="skills" value="Python">
+            Python
+        </label>
+    </div>
+
+    <div class="form-check">
+        <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="skills" value="PHP">
+            PHP
+        </label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="skills" value="C#">
+        <label class="form-check-label" for="skills">
+            C#
+        </label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="MySQL" name="skills">
+        <label class="form-check-label" for="skills">
+            MySQL
+        </label>
+    </div>
+
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="SQL Server" name="skills">
+        <label class="form-check-label" for="skills">
+            SQL Server
+        </label>
+    </div>
+    <br>
+    <hr>
+
+    <p>Do you want to subscribe with our monthly newsletter?</p>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="subscribe" id="exampleRadios1" value="y" checked>
+        <label class="form-check-label" for="exampleRadios1">
+            Yes
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="subscribe" id="exampleRadios2" value="n">
+        <label class="form-check-label" for="exampleRadios2">
+            No
+        </label>
+    </div>
+
+    <!-- 
+            We can change the btn-primary to any other color:
+            The link: https://getbootstrap.com/docs/5.0/components/buttons/
+    -->
+    <button type="submit" class="btn btn-info">Submit</button>
+    <button type="reset" class="btn btn-info">Clear</button>
+</form>
 {% endblock %}

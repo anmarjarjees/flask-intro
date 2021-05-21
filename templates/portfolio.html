@@ -283,6 +283,20 @@
     <h3><a href="/campus/{{ cbc[0]['campus'] }}">{{ cbc[0]['campus'] }}</a></h3> 
 -->
 <h3><a href="/campus/{{ campus_info['campus'] }}">{{ campus_info['campus'] }} Campus Programs:</a></h3>
+<!-- 
+    The (local: 127.0.0.1:5000) urls:  
+    http://127.0.0.1:5000/campus/Toronto 
+    http://127.0.0.1:5000/campus/Mississauga
+    http://127.0.0.1:5000/campus/Scarborough
+
+    These urls don't match the url for our route!
+    our route() function => @app.route("/campus")
+    but we are passing the url using href like this "/campus/campus_name"
+
+    The solution for fixing 404 (page not found): @app.route("/campus/<campus_name>")
+    Using < > with a varaible named "campus_name"
+
+-->
 <ul>
     {% for program_name in campus_info['programs'] %}
     <li>{{program_name}}</li>

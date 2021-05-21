@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- 
+    Please remember that this page will be opened only if all the required fields are filled with any values
+-->
+
+<!-- also the following template form Bootstrap:
+    https://getbootstrap.com/docs/5.0/components/alerts/
+-->
+
+<div class="alert alert-success" role="alert">
+    <h2 class="alert-heading">All right, it's done!</h2>
+    <h4>Dear {{ first_name }} {{ last_name }}</h4>
+    <p>Thank you for registering in our website, we will use this email "{{ email }}" only to send you our updates</p>
+
+    <!-- display the user skills -->
+    <ul>
+        <!-- remember that this { % for statement -->
+        {% for skill in skills: %}
+        <!-- this { { for expression -->
+        <li>{{ skill}}</li>
+        {% endfor %}
+    </ul>
+
+
+    <hr>
+    <!-- 
+        Let's check if the user checked the subscribe box or not:
+
+        if subscribe has the value of "y"
+        then we can display: We will send you a pdf copy of our monthly newsletter
+        otherwise: nothing to display
+    -->
+    {% if sub=='y' %}
+    <p>We will send you a pdf copy of our monthly newsletter</p>
+    {% endif %}
+</div>
+
+{% endblock %}

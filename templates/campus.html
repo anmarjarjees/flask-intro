@@ -2,5 +2,50 @@
 
 
 {% block content %}
-<p>Hi there, I hope you are doing well, here is the page for your campus info :-)</p>
+<!-- <p>Hi there, I hope you are doing well, here is the page for your campus info</p> -->
+
+<h2>Raw Display (No Formatting)</h2>
+{{ campus }}
+<!-- 
+    campus is just a "JSON object" [Dictionary in Python :-)] for one campus that has 3 keys:
+    key#1: campus => the campus name
+    key#2: phone => the phone number
+    key#3: programs => the list of the programs
+
+    {
+        'campus': 'Scarborough', 
+        'phone': '905-123-1235', 
+        'programs': ['FSSD', 'MDM', 'DMWD', 'SW Eng.', 'APA', 'Law']
+    } 
+-->
+<hr>
+<!-- 
+    Task: Using heading2 to display for example: "Scarborough Campus"
+ -->
+<h2>{{campus['campus']}} Campus</h2>
+
+<h3>Programs:</h3>
+
+<!-- Quick Test -->
+{{ campus['programs']}}
+<!-- 
+     Task: using html unordered list to list the programs of that campus
+     - FSSD
+     - MDM
+     - so on...
+
+    in pure python file:
+    for program_name in campus['programs']
+        print program_name
+  -->
+
+<ul>
+    {% for program_name in campus['programs'] %}
+    <li>{{ program_name }}</li>
+    {% endfor %}
+</ul>
+
+
+<p>You can call us using this number: {{ campus['phone'] }}</p>
+
 {% endblock %}
