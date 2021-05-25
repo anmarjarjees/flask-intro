@@ -53,18 +53,24 @@ def home():  # or name it "main" or name it "index"
 
 # Using the same syntax (template): @object_name.route('the URL')
 
+# step 1: specify the route name
 @app.route('/about')  # The local link: http://127.0.0.1:5000/about
 # Most of the cases the function name could be the same as the URL value we are passing to the route (not mandatory)
+# step 2: creating the view (function)
 def about():
     return("<h1>About working with Flask Framework</h1>")
 
 
+# step 1: specify the route name
 @app.route('/portfolio')  # The local link: http://127.0.0.1:5000/portfolio
+# step 2: creating the view (function)
 def portfolio():
     return("<h1>My amazing portfolio</h1>")
 
 
+# step 1: specify the route name
 @app.route('/contact')  # The local link: http://127.0.0.1:5000/contact
+# step 2: creating the view (function)
 def contact():
     return("<h1>Contact Us</h1")
 
@@ -72,3 +78,5 @@ def contact():
 # A much better practice is to keep our HTML out of your code entirely
 # by using templates, so that your code is concerned only
 # with data values and not with rendering.
+
+# Each function (which is also called a view) is controlled by its route = > # so every view has it's own route controller

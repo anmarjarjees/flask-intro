@@ -1,6 +1,6 @@
 Dear Students,
 This Folder is about Flask Introduction Tutorial.
-We will create our first website using Python/Flask + HTML/CSS
+We will create our first website using Python/Flask Framework + Bootstrap Framework
 
 Regards,
 Instructor: Anmar Jarjees
@@ -16,7 +16,7 @@ Inside the project folder, create the venv:
 You can check the full article:
 https://flask.palletsprojects.com/en/1.1.x/installation/#installation
 
-step1: Create the virtual Env.
+Step1: Create the virtual Env.
 (Windows-Powershell-GitBash)=>> py -m venv intro-venv  
 (Mac-Terminal or GitBash)==>> python3 -m venv intro-venv
 NOTE: 
@@ -38,7 +38,7 @@ just: intro-venv\Scripts\Activate OR intro-venv\scripts\activate
 
 NOTE: To deactivate the current venv =>> deactivate
 
-step3: Install the required package "Flask" (inside our venv) 
+Step3: Install the required package "Flask" (inside our venv) 
 Run of of the following commands to download and install flask locally:
 For the first time =>> pip install flask 
 OR for any user after getting our code: =>> pip install -r requirements.txt
@@ -69,12 +69,12 @@ Werkzeug==2.0.0
 === We finished installing the package and activating the venv ===
 === We will start building our application (app) ===
 
-step4: create a new python file to be the main file (the major one) 
+Step4: create a new python file to be the main file (the major one) 
 to run our application, although this Py file could be any name, 
 but by default we should name it "app" (it's better and much easier, you will see why)
 This file has to be inside the main project folder-  then jump to app.py :-)
 
-step5: After finishing our initial (required) code in app.py
+Step5: After finishing our initial (required) code in app.py
 you can run flask application:
 we can test our app on PowerShell:
 we can type =>> py -m flask run
@@ -163,7 +163,7 @@ Mac => export FLASK_APP=app; export FLASK_ENV=development; flask run
 in such case we can just run these two commands: $env:FLASK_ENV = "development"; flask run 
 
 
-step6 (When you close your application and reopen it again):
+Step6 (When you close your application and reopen it again):
 After closing (quitting) the application, then if you open the project again (in VS Code) and runt it:
 - You can just open the main file "app.py" and VSC should activate the venv automatically
 (Make sure  your venv is activate before running your file)
@@ -226,13 +226,55 @@ needs only to run the pip install -r requirements.txt command
 to reinstall the packages in the original the environment. 
 (The recipient still needs to create their own virtual environment, however.)
 
+***************
+Final Summary:
+***************
+
+To summarize, to create a new project :-):
+------------------------------------------
+Focusing on using Powershell Terminal Only:
+First Time (Create a virtual environment):
+> py -m venv any-name => let's name it "env" =>>  py -m venv env 
+> activate the venv > any-name\scripts\activate =>> env\scripts\activate
+> Now we can use pip list to view the packages that we have by default inside the venv
+> install our package locally inside the venv: 
+=>> pip install flask
+
+NOTE:
+- In case if you see this error: Unable to import 'flask'pylint(import-error)
+- You can follow these steps on VSC docs starting from piont 4 to point 5:
+https://code.visualstudio.com/docs/python/tutorial-flask
+
+NOTE: running pip list command VS running pip freeze command:
+1) The result format/layout
+2) different results:
+- pip list can display the basic default packages that added automatically to our venv + the installed packages
+The default packages:
+pip        19.2.3
+setuptools 41.2.0
+- pip freeze can only display the manually installed packages
+
+- Now we can create the requirements.txt file that contains the required packages/dependencies to run our project locally/Heroku:
+- pip freeze > requirements.txt (required for heroku deployment)
+
+NOTE: Other people/devs can use this command: =>> pip install requirements.txt
 
 To summarize, to reopen a project :-):
-1) Open the entire folder in VS Code: File => Open Folder (CTRL+K, CTRL+O)
+--------------------------------------
+1) Open the project folder in VS Code: File => Open Folder (CTRL+K, CTRL+O)
 2) Activate your virtual environment: any-name\Scripts\activate
-(in case if you see an error with activation about execution policy please refer to our python note file)
-3) Run the flask with development mode (not in production mode): 
+(in case if you see an error with activation about execution policy please refer to my python note pdf file)
+3) Running our application: two ways to run our flask application (For Windows PowerShell):
+3.a) Run the flask with development mode (not in production mode): 
 > $env:FLASK_APP = "app"; $env:FLASK_ENV = "development"; flask run
 > $env:FLASK_ENV = "development"; flask run
 > Or with the LMS of Code Institute: $env:FLASK_APP = "run"; $env:FLASK_ENV = "development"; flask run 
-4) Jump to your code
+
+NOTE:
+> $env:FLASK_APP = "flaskr" => you need to run this command ONLY if your application name is NOT "app.py"
+
+3.b) Run the flask with production mode (not in development mode):
+> $env:FLASK_ENV = flask run (CTRL+C to quit flask)
+4) Jump to your code and happy coding :-)
+
+

@@ -12,6 +12,8 @@ import json
 
 app = Flask(__name__)
 
+# The route for home page is "/" => Example: # https://canadianbusinesscollege.com/
+
 
 @app.route('/')  # The local link (the root): http://127.0.0.1:5000/
 def home():  # or name it "main" or name it "index"
@@ -50,6 +52,10 @@ def about():
               "Flask Framework", "Django Framework", "Databases"]
     return render_template('about.html', skills=skills, page_title=page_title)
 
+
+# NOTE:
+# Please notice that we should remove page_title local variables from home() and about() views(functions)
+# as we did a better option in base.html file (I will keep them for the learning purpose)
 
 @app.route('/portfolio')  # The local link: http://127.0.0.1:5000/portfolio
 def portfolio():

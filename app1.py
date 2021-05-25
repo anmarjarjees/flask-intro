@@ -16,6 +16,9 @@ def hello_world():
     return "<p>Hello, World!</p>"
 """
 
+# Here is a broad overview of some of the most common operations.
+
+# First of all you have to import it from the flask module:
 # let's import Flask class
 from flask import Flask
 # If flask is NOT installed: ModuleNotFoundError: No module named 'flask'
