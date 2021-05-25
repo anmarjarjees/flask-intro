@@ -1,13 +1,13 @@
 # Flask Introduction
 
-ear Students,
+#### Dear Students,
 This Folder is about Flask Introduction Tutorial.
 We will create our first website using Python/Flask Framework + Bootstrap Framework
 
 Regards,
 Instructor: Anmar Jarjees
 
-
+---
 To read the full info about working with Flask using VS Code:
 https://code.visualstudio.com/docs/python/tutorial-flask
 
